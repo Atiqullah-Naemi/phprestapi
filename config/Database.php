@@ -10,7 +10,16 @@ class Database
 	private $dbusername = 'root';
 	private $dbpassword = '';
 	private $con;
+
+	public function connect()
+	{
+		// try to connect to database using PDO
+		try {
+			$this->con = new PDO('mysql:host=' . $this->dbhost . ';dbname=' . $this->dbname, $this->dbusername, $this->dbpassword);
+		} catch(PDOException $e) {
+			echo 'Failed to connect to db ' . $e->getMessage();
+		}
+
+		return $this->con;
+	}
 }
-
-
-?>
